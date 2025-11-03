@@ -105,6 +105,19 @@ if livro_antigo:
 else:
     print("  Nenhum livro encontrado com ano anterior a 1940.")
 
+# ETAPA 9: Criar tabela Usuario
+print("[ETAPA 9] Criando a tabela de Usuario...")
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS Usuario (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT
+    )
+''')
+
+conn.commit()
+print("Tabela Usuario criada com sucesso!")
+
 # Fechando a conexão
 conn.close()
 print("Conexão encerrada")
