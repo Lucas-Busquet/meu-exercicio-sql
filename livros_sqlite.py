@@ -43,7 +43,7 @@ print("livros inseridos com sucesso")
 
 #mostrar os livros inseridos
 cursor.execute('SELECT * FROM Livros')
-print("\nLivros cadastrados:")
+print("Livros cadastrados:")
 for livro in cursor.fetchall():
     print(f"  ID: {livro[0]} | {livro[1]} - {livro[2]} ({livro[3]})")
   
@@ -119,7 +119,7 @@ conn.commit()
 print("Tabela Usuario criada com sucesso!")
 
 # ETAPA 10: Adicionar coluna 'idade' na tabela Usuario
-print("\n[ETAPA 10] Adicionando coluna 'idade' na tabela Usuario...")
+print("[ETAPA 10] Adicionando coluna 'idade' na tabela Usuario...")
     # Mantive o try-except para evitar que o script falhe na segunda execução,
     # caso a coluna 'idade' já exista.
 try:
@@ -131,7 +131,7 @@ except sqlite3.OperationalError as e:
 
 
 # ETAPA 11: Inserir 5 usuários (A duplicação foi removida)
-print("\n[ETAPA 11] Inserindo 5 usuários...")
+print("[ETAPA 11] Inserindo 5 usuários...")
 
 usuarios = [
     ("Ana Silva", 28),
@@ -163,7 +163,7 @@ cursor.execute('DROP TABLE IF EXISTS Usuario')
 conn.commit()
 print("Tabela Usuario deletada com sucesso!")
 
-print("\n" + "=" * 50)
+print("=" * 50)
 print("TODAS AS ETAPAS CONCLUÍDAS COM SUCESSO!")
 print("=" * 50)
 
