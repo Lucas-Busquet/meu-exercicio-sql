@@ -153,6 +153,43 @@ print("-" * 50)
 for usuario in cursor.fetchall():
     print(f"  ID: {usuario[0]} | Nome: {usuario[1]} | Idade: {usuario[2]}")
 
+# ETAPA 11: Inserir 5 usuários
+print("[ETAPA 11] Inserindo 5 usuários...")
+
+usuarios = [
+    ("Ana Silva", 28),
+    ("Carlos Santos", 35),
+    ("Mariana Costa", 22),
+    ("Pedro Oliveira", 41),
+    ("Julia Ferreira", 30)
+]
+
+cursor.executemany('''
+    INSERT INTO Usuario (nome, idade)
+    VALUES (?, ?)
+''', usuarios)
+
+conn.commit()
+print(f"{cursor.rowcount} usuários inseridos com sucesso!")
+
+# Mostrar usuários cadastrados
+cursor.execute('SELECT * FROM Usuario')
+print("Usuários Cadastrados:")
+print("-" * 50)
+for usuario in cursor.fetchall():
+    print(f"  ID: {usuario[0]} | Nome: {usuario[1]} | Idade: {usuario[2]}")
+
+# ETAPA 12: Deletar tabela Usuario ( ETAPA Final)
+print("[ETAPA 12] Deletando tabela Usuario...")
+
+cursor.execute('DROP TABLE IF EXISTS Usuario')
+conn.commit()
+print("Tabela Usuario deletada com sucesso!")
+
+print("\n" + "=" * 50)
+print("TODAS AS ETAPAS CONCLUÍDAS COM SUCESSO!")
+print("=" * 50)
+
 # Fechando a conexão
 conn.close()
 print("Conexão encerrada")
