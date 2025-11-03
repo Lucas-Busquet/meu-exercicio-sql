@@ -22,7 +22,7 @@ conn.commit()
 print("Tabela Livros criada")
 
 # ETAPA 4: Inserir 5 livros fictícios
-print("\n[ETAPA 4] Inserindo 5 livros fictícios...")
+print("[ETAPA 4] Inserindo 5 livros fictícios...")
 
 livros = [
     ("1984", "George Orwell", 1949, "Ficção Distópica", 1),
@@ -42,11 +42,23 @@ conn.commit()
 print("livros inseridos com sucesso") 
 
 #mostrar os livros inseridos
-cursor.execute("SELECT * FROM Livros")
-print("Livros cadastrados:")
+cursor.execute('SELECT * FROM Livros')
+print("\nLivros cadastrados:")
 for livro in cursor.fetchall():
-    print(f"ID: {livro[0]}, Título: {livro[1]}, Autor: {livro[2]}, Ano: {livro[3]}, Gênero: {livro[4]}, Disponível: {'Sim' if livro[5] == 1 else 'Não'}")
-    
+    print(f"  ID: {livro[0]} | {livro[1]} - {livro[2]} ({livro[3]})")
+  
+# ETAPA 5: Consultar os livros disponíveis
+print("[ETAPA 5] Consultando livros disponíveis...")
+
+cursor.execute('SELECT * FROM Livros WHERE disponivel = 1')
+livros_disponiveis = cursor.fetchall()
+
+print("Livros Disponíveis:")
+print("-" * 80)
+for livro in livros_disponiveis:
+    print(f"ID: {livro[0]} | {livro[1]} | {livro[2]} | Ano: {livro[3]} | {livro[4]}")    
+
+
 # Fechando a conexão
 conn.close()
 print("Conexão encerrada")
