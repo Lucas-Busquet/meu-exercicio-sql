@@ -119,8 +119,9 @@ conn.commit()
 print("Tabela Usuario criada com sucesso!")
 
 # ETAPA 10: Adicionar coluna 'idade' na tabela Usuario
-print("[ETAPA 10] Adicionando coluna 'idade' na tabela Usuario...")
-
+print("\n[ETAPA 10] Adicionando coluna 'idade' na tabela Usuario...")
+    # Mantive o try-except para evitar que o script falhe na segunda execução,
+    # caso a coluna 'idade' já exista.
 try:
     cursor.execute('ALTER TABLE Usuario ADD COLUMN idade INTEGER')
     conn.commit()
@@ -128,33 +129,9 @@ try:
 except sqlite3.OperationalError as e:
     print(f"  Aviso: Coluna pode já existir - {e}")
 
+
+# ETAPA 11: Inserir 5 usuários (A duplicação foi removida)
 print("\n[ETAPA 11] Inserindo 5 usuários...")
-
-usuarios = [
-    ("Ana Silva", 28),
-    ("Carlos Santos", 35),
-    ("Mariana Costa", 22),
-    ("Pedro Oliveira", 41),
-    ("Julia Ferreira", 30)
-]
-
-cursor.executemany('''
-    INSERT INTO Usuario (nome, idade)
-    VALUES (?, ?)
-''', usuarios)
-
-conn.commit()
-print(f"{cursor.rowcount} usuários inseridos com sucesso!")
-
-# Mostrar usuários cadastrados
-cursor.execute('SELECT * FROM Usuario')
-print("Usuários Cadastrados:")
-print("-" * 50)
-for usuario in cursor.fetchall():
-    print(f"  ID: {usuario[0]} | Nome: {usuario[1]} | Idade: {usuario[2]}")
-
-# ETAPA 11: Inserir 5 usuários
-print("[ETAPA 11] Inserindo 5 usuários...")
 
 usuarios = [
     ("Ana Silva", 28),
