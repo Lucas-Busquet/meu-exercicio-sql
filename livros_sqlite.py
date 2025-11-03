@@ -118,6 +118,16 @@ cursor.execute('''
 conn.commit()
 print("Tabela Usuario criada com sucesso!")
 
+# ETAPA 10: Adicionar coluna 'idade' na tabela Usuario
+print("[ETAPA 10] Adicionando coluna 'idade' na tabela Usuario...")
+
+try:
+    cursor.execute('ALTER TABLE Usuario ADD COLUMN idade INTEGER')
+    conn.commit()
+    print("Coluna 'idade' adicionada com sucesso!")
+except sqlite3.OperationalError as e:
+    print(f"  Aviso: Coluna pode já existir - {e}")
+
 # Fechando a conexão
 conn.close()
 print("Conexão encerrada")
