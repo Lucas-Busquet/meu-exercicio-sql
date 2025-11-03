@@ -128,6 +128,31 @@ try:
 except sqlite3.OperationalError as e:
     print(f"  Aviso: Coluna pode já existir - {e}")
 
+print("\n[ETAPA 11] Inserindo 5 usuários...")
+
+usuarios = [
+    ("Ana Silva", 28),
+    ("Carlos Santos", 35),
+    ("Mariana Costa", 22),
+    ("Pedro Oliveira", 41),
+    ("Julia Ferreira", 30)
+]
+
+cursor.executemany('''
+    INSERT INTO Usuario (nome, idade)
+    VALUES (?, ?)
+''', usuarios)
+
+conn.commit()
+print(f"{cursor.rowcount} usuários inseridos com sucesso!")
+
+# Mostrar usuários cadastrados
+cursor.execute('SELECT * FROM Usuario')
+print("Usuários Cadastrados:")
+print("-" * 50)
+for usuario in cursor.fetchall():
+    print(f"  ID: {usuario[0]} | Nome: {usuario[1]} | Idade: {usuario[2]}")
+
 # Fechando a conexão
 conn.close()
 print("Conexão encerrada")
