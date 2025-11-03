@@ -58,6 +58,24 @@ print("-" * 80)
 for livro in livros_disponiveis:
     print(f"ID: {livro[0]} | {livro[1]} | {livro[2]} | Ano: {livro[3]} | {livro[4]}")    
 
+# ETAPA 6: Atualizando a disponibilidade de um livro
+print("[ETAPA 6] Atualizando disponibilidade de um livro...")
+
+# Atualizar o livro "1984" para indisponível
+cursor.execute('''
+    UPDATE Livros 
+    SET disponivel = 0 
+    WHERE titulo = "1984"
+''')
+
+conn.commit()
+print("Disponibilidade do livro '1984' atualizada para indisponível!")
+
+# Verificar atualização
+cursor.execute('SELECT titulo, disponivel FROM Livros WHERE titulo = "1984"')
+resultado = cursor.fetchone()
+status = 'Sim' if resultado[1] == 1 else 'Não'
+print(f"  Status atual: {resultado[0]} - Disponível: {status}")
 
 # Fechando a conexão
 conn.close()
