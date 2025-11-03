@@ -77,6 +77,34 @@ resultado = cursor.fetchone()
 status = 'Sim' if resultado[1] == 1 else 'Não'
 print(f"  Status atual: {resultado[0]} - Disponível: {status}")
 
+# ETAPA 7: Ordenar livros por ano (decrescente)
+print("[ETAPA 7] Ordenando livros por ano (mais recente → mais antigo)...")
+
+cursor.execute('SELECT titulo, autor, ano FROM Livros ORDER BY ano DESC')
+livros_ordenados = cursor.fetchall()
+
+print("Livros Ordenados por Ano:")
+print("-" * 80)
+for livro in livros_ordenados:
+    print(f"{livro[2]} - {livro[0]} por {livro[1]}")
+
+# ETAPA 8: Deletando livro publicado antes de 1940
+print("[ETAPA 8] Deletando livro publicado antes de 1940...")
+
+# Buscando livro antigo
+cursor.execute('SELECT titulo, ano FROM Livros WHERE ano < 1940')
+livro_antigo = cursor.fetchone()
+
+if livro_antigo:
+    print(f"  Livro a ser deletado: {livro_antigo[0]} ({livro_antigo[1]})")
+    
+    # Deletar o livro
+    cursor.execute('DELETE FROM Livros WHERE ano < 1940')
+    conn.commit()
+    print(f"{cursor.rowcount} livro(s) deletado(s)!")
+else:
+    print("  Nenhum livro encontrado com ano anterior a 1940.")
+
 # Fechando a conexão
 conn.close()
 print("Conexão encerrada")
