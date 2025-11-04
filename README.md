@@ -10,7 +10,26 @@ Da etapa (3-12)
 .ALTER TABLE para adicionar uma nova coluna
 .DELETE e DROP TABLE para remover registros e fazer limpeza do banco de dados
 
-Respostas das Questoes teóricas:
+#### Tabela: Livros
+
+| Campo | Tipo | Restrições |
+|-------|------|------------|
+| id | INTEGER | PRIMARY KEY, AUTOINCREMENT |
+| titulo | TEXT | NOT NULL, UNIQUE |
+| autor | TEXT | - |
+| ano | INTEGER | - |
+| genero | TEXT | - |
+| disponivel | INTEGER | DEFAULT 1 (1=disponível, 0=indisponível) |
+
+#### Tabela: Usuario (criada e deletada durante execução)
+
+| Campo | Tipo | Restrições |
+|-------|------|------------|
+| id | INTEGER | PRIMARY KEY, AUTOINCREMENT |
+| nome | TEXT | - |
+| idade | INTEGER | Adicionada via ALTER TABLE |
+
+Respostas das Questões teóricas:
 P2:
 
 1 - Os bancos de dados são a espinha dorsal de qualquer aplicação moderna porque fornecem um meio seguro, consistente e escalável para armazenar, gerenciar e recuperar dados. Eles garantem que informações críticas (como registros de usuários ou transações financeiras) sejam acessíveis simultaneamente por múltiplos usuários, mantendo a integridade dos dados. Fonte: https://aws.amazon.com/pt/what-is/database-management/
